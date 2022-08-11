@@ -3,8 +3,8 @@ from selenium import webdriver
 import pandas as pd 
 import time
 
-x = -180+0.01
-y = -55+0.01
+x = -124+0.01
+y = -32+0.01
 
 # x = -84+0.01
 # y = 32+0.01
@@ -13,12 +13,12 @@ data = []
 
 driver = webdriver.Chrome("/usr/local/bin/chromedriver")
 
-while x < 180:
-    y = -55+0.01
-    while y < 78:
+while x < 147:
+    y = -32+0.01
+    while y < 54:
         url = "https://www.starbucks.com/store-locator?map="+str(y)+","+str(x)+",10z"
         driver.get(url)
-        time.sleep(1)
+        time.sleep(2)
 
         html = driver.page_source
         soup = BeautifulSoup(html, "html.parser")
@@ -27,7 +27,7 @@ while x < 180:
 
         for i in all_store:
             name = i['name']
-            address = str(i['address']['streetAddressLine1']) + str(i['address']['streetAddressLine2']) + str(i['address']['streetAddressLine3'])
+            address = str(i['address']['streetAddressLine1']) +" "+ str(i['address']['streetAddressLine2']) +" "+ str(i['address']['streetAddressLine3'])
             storenumber = i['storeNumber']
             countryCode = i['address']['countryCode']
             data.append([name,address,storenumber,countryCode])
