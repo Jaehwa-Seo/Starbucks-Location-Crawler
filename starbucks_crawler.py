@@ -3,8 +3,8 @@ from selenium import webdriver
 import pandas as pd 
 import time
 
-x = -124+0.01
-y = -32+0.01
+x = -78+0.01
+y = -6+0.01
 
 # x = -84+0.01
 # y = 32+0.01
