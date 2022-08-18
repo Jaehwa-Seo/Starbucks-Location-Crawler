@@ -3,8 +3,8 @@ from selenium import webdriver
 import pandas as pd 
 import time
 
-x = -78+0.01
-y = -6+0.01
+x = -173.64
+y = 22.2
 
 # x = -84+0.01
 # y = 32+0.01
@@ -15,20 +15,26 @@ columns = ["Store Name","Street Address","Store Number","Country","Ownership Typ
 
 driver = webdriver.Chrome("/usr/local/bin/chromedriver")
 
-while x < 147:
-    while y < 54:
-        url = "https://www.starbucks.com/store-locator?map="+str(y)+","+str(x)+",10z"
+while x < 180:
+    while y < 77.6:
+        url = "https://www.starbucks.com/store-locator?map="+str(y)+","+str(x)+",12z"
         driver.get(url)
         time.sleep(2)
 
         html = driver.page_source
         soup = BeautifulSoup(html, "html.parser")
 
+        if driver.execute_script("return window.__BOOTSTRAP['storeLocator']['locationState']['locations']") == None:
+            driver.get(url)
+            time.sleep(3)
+
         all_store = driver.execute_script("return window.__BOOTSTRAP['storeLocator']['locationState']['locations']")
 
         for i in all_store:
             name = i['name']
-            address = str(i['address']['streetAddressLine1']) +" "+ str(i['address']['streetAddressLine2']) +" "+ str(i['address']['streetAddressLine3'])
+            address = ""
+            for j in i['addressLines']:
+                address += str(j) + " "
             storenumber = i['storeNumber']
             countryCode = i['address']['countryCode']
             ownershiptype = i['ownershipTypeCode']
@@ -41,7 +47,7 @@ while x < 147:
         print("-------------------------------------------------------------------")
         print(str(y) + "," + str(x))
         print(len(data))
-        y += 1
+        y += 0.3
 
         df = pd.DataFrame(data,columns= columns)
 
@@ -54,8 +60,8 @@ while x < 147:
         # df.to_excel(writer, sheet_name='starbucks')
 
         # writer.save()
-    x += 1
-    y = -32+0.01
+    x += 0.3
+    y = -90+0.01
 
 
 
