@@ -3,8 +3,11 @@ from selenium import webdriver
 import pandas as pd 
 import time
 
-x = -173.64
-y = 22.2
+# x = -172.4
+# y = -27.9
+
+x = 126.31999999999994
+y = 33.450000000000045
 
 # x = -84+0.01
 # y = 32+0.01
@@ -15,9 +18,9 @@ columns = ["Store Name","Street Address","Store Number","Country","Ownership Typ
 
 driver = webdriver.Chrome("/usr/local/bin/chromedriver")
 
-while x < 180:
-    while y < 77.6:
-        url = "https://www.starbucks.com/store-locator?map="+str(y)+","+str(x)+",12z"
+while x < 129.3:
+    while y < 38.6:
+        url = "https://www.starbucks.com/store-locator?map="+str(y)+","+str(x)+",13z"
         driver.get(url)
         time.sleep(2)
 
@@ -51,7 +54,7 @@ while x < 180:
 
         df = pd.DataFrame(data,columns= columns)
 
-        df.to_csv("starbucks_store_info.csv")
+        df.to_csv("starbucks_store_info_seoul_2.csv")
 
         # df.drop_duplicates(['매장번호'],keep = 'first',inplace=True)
 
@@ -61,7 +64,7 @@ while x < 180:
 
         # writer.save()
     x += 0.3
-    y = -90+0.01
+    y = 33.17
 
 
 

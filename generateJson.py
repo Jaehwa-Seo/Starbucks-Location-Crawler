@@ -1,10 +1,10 @@
 import pandas as pd 
 import json
 
-df = pd.read_csv('./-5-77_info.csv')
+df = pd.read_csv('./csv/allcountry.csv')
 
-nftName = "Metatwin Test";
-description = "Description Please";
+nftName = "Metatwin country";
+description = "Description";
 imgUrl = "hahahah";
 totalNum = 100;
 
@@ -91,11 +91,11 @@ countryCode = {"US" : "United States",
 
 # print(countryCode["KR"])
 
-while i < 100:
+while i < len(df.index):
     jsonString = '{"name":"' + nftName + '","description":"' + description + '","image":"' + imgUrl + '","attributes":['
     jsonString += '{"trait_type" : "Country","value" : "' + countryCode[df.loc[i]["Country"]] +'"},'
     jsonString += '{"trait_type" : "City","value" : "' + df.loc[i]["City"] + '"}]}'
-    fileName = "./json/"+str(i)+".json"
+    fileName = "./json/"+str(i+1)+".json"
 
     file = open(fileName, "w")
     file.write(jsonString)
