@@ -1,9 +1,9 @@
 import pandas as pd
 
-df = pd.read_csv('./csv/allcountry.csv')
+df = pd.read_csv('./csv/singapore.csv')
 
-index1 = df[df['Country'] == "KR"].index
+index1 = df[df['Country'] != "SG"].index
 
 df.drop(index1,inplace=True)
 
-df.to_csv("./csv/allcountry.csv",index=False)
+df.to_csv("./csv/singapore.csv",index=False)

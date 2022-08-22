@@ -1,7 +1,7 @@
 import pandas as pd 
 
 
-df = pd.read_csv('./csv/singapore.csv')
+df = pd.read_csv('./csv/UK.csv')
 
 df.drop_duplicates(['Country'],keep = 'first',inplace=True)
 
